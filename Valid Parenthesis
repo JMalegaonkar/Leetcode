@@ -1,0 +1,16 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        hashTable = {"(" : ")", "{" : "}","[" : "]"}
+        stack = []
+        
+        for i in s:
+            # if the open paren exists in dictionary (keys)
+            if i in hashTable.keys():
+                # then push to the stack
+                stack.append(i)
+                # if the stack is empty or if when we pop the stack, doesn't return a closing paren, that means its misplaced
+            else:
+                if ( (len(stack) == 0) or (i != hashTable[stack.pop()])):
+                    return False
+        # if the stack is empty, not valid but the stack contains properly placed, valid parentheses
+        return len(stack) == 0
