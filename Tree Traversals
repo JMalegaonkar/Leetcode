@@ -1,0 +1,50 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+
+def inorderTraversal(root):
+    stack = []
+	  trav = []
+    while root or stack:
+        if root:
+            stack.append(root)
+            root = root.left
+        else:
+            root = stack.pop()
+            trav.append(root.val)
+            root = root.right
+    return trav
+
+
+def preorderTraversal(root):
+    stack = []
+	  trav = []
+    while root or stack:
+        if root:
+            trav.append(root.val)
+            stack.append(root)
+            root = root.left
+        else:
+            root = stack.pop()
+            root = root.right
+    return trav
+
+
+
+def postorderTraversal(root):
+    stack = []
+	  trav = []
+    while root or stack:
+        if root:
+            trav.append(root.val)
+            stack.append(root)
+            root = root.right
+        else:
+            root = stack.pop()
+            root = root.left
+    trav.reverse()
+    return trav
