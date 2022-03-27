@@ -1,0 +1,16 @@
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+		#base condition check
+        if not nums:
+            return 0
+        running_max = nums[0]
+        current_max = nums[0]
+     # looping through nums from 1 to len(nums)
+        for i in range(1,len(nums)):
+			#checking  for current max with current nums value
+            current_max = max(nums[i], current_max + nums[i])
+			#checking for max from current max and prev max
+            running_max = max(running_max,current_max)
+         
+        return running_max
+   
