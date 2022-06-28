@@ -1,0 +1,16 @@
+class Solution(object):
+    def lastStoneWeight(self, stones):
+        """
+        :type stones: List[int]
+        :rtype: int
+        """
+        stones = [-s for s in stones] # make into max heap by multiplying all by -1
+        heapq.heapify(stones)
+        
+        while len(stones) > 1:
+            stone1 = heapq.heappop(stones)
+            stone2 = heapq.heappop(stones)
+            if stone2 > stone1:
+                heapq.heappush(stones, stone1-stone2)
+        stones.append(0)
+        return abs(stones[0])
