@@ -1,0 +1,31 @@
+class Logger(object):
+
+    def __init__(self):
+        self.mssg = {}
+
+    def shouldPrintMessage(self, timestamp, message):
+        """
+        :type timestamp: int
+        :type message: str
+        :rtype: bool
+        """
+        if message not in self.mssg:
+            # case 1). add the message to print
+            self.mssg[message] = timestamp
+            return True
+        
+        if timestamp - self.mssg[message] >= 10:
+            # case 2). update the timestamp of the message
+            self.mssg[message] = timestamp
+            return True
+        else:
+            return False
+        
+            
+            
+        
+
+
+# Your Logger object will be instantiated and called as such:
+# obj = Logger()
+# param_1 = obj.shouldPrintMessage(timestamp,message)
