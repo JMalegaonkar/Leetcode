@@ -1,0 +1,30 @@
+class Solution:
+    def countBattleships(self, board: List[List[str]]) -> int:
+        if not board or not board[0]:
+            return 0
+        
+        ships = 0
+        visit = set()
+        
+        rows, cols = len(board), len(board[0])
+        
+        def dfs(r, c):
+            if (r not in range(rows) or 
+                c not in range(cols) or 
+                board[r][c] == "."   or 
+                (r, c) in visit):
+                return
+            visit.add((r,c))
+            
+            directions = [[0, 1], [1, 0]]
+            
+            for x , y in directions:
+                dfs(r + x, c + y)
+        
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == "X" and (r,c) not in visit:
+                    ships += 1
+                    dfs(r,c)
+        return ships
+        
