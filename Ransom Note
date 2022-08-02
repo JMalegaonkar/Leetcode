@@ -1,0 +1,12 @@
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        
+        r = {}
+        for l in ransomNote:
+            r[l] = 1 + r.get(l, 0)
+        for l in magazine:
+            if l in r:
+                r[l] = r[l] - 1
+                if r[l] == 0:
+                    r.pop(l)
+        return False if r else True
