@@ -23,3 +23,19 @@ class Solution(object):
             output  += digit
             n = n//10
         return output
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        curSum = 0
+        sumSet = set([])
+        while n != 1:
+            while n:
+                x = n % 10
+                n = n // 10
+                curSum += x ** 2
+            if curSum not in sumSet:
+                sumSet.add(curSum)
+            else:
+                return False
+            n = curSum
+            curSum = 0
+        return True
