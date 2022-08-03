@@ -23,3 +23,18 @@ class Solution:
                 if isConnected[r][c] == 1:
                     uf.union(r,c)
         return len(set([uf.find(node) for node in range(n)]))
+        seen = set()
+
+        def dfs(node):
+		   # isConnected[node][nei]: nei is the index at node 0 index of the list, and adj is the value at that index
+            for nei, adj in enumerate(isConnected[node]):  
+                if adj and nei not in seen:
+                    seen.add(nei)
+                    dfs(nei)
+
+        ans = 0
+        for i in range(len(isConnected)):
+            if i not in seen:
+                dfs(i)
+                ans += 1
+        return ans
