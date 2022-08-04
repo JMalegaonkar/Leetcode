@@ -1,0 +1,18 @@
+class Solution:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        adj_list = graph
+        target = len(graph) - 1
+        res = []
+        
+        def dfs(node, path):
+            if node == target:
+                    res.append(list(path))
+                    return
+            
+            for adj in adj_list[node]:
+                path.append(adj)
+                dfs(adj, path)
+                path.pop()
+        path = deque([0])
+        dfs(0, path)
+        return res
