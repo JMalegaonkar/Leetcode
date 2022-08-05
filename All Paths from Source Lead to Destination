@@ -1,0 +1,24 @@
+class Solution:
+    def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        adj_list = [[] for _ in range(n)]
+        visit = set()
+        
+        for x,y in edges:
+            if x == destination:
+                return False
+            adj_list[x].append(y)
+            
+        def backtrack(node):
+            #case to break out
+            if node == destination:
+                return True
+            if node in visit or not adj_list[node]:
+                return False
+            
+            visit.add(node)
+            for nei in adj_list[node]:
+                if not backtrack(nei):
+                    return False
+            visit.remove(node)
+            return True
+        return backtrack(source)
